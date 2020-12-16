@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#02adab</color>
+    <color name="colorPrimaryDark">#02adab</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimaryOpacidad">#CD02ADAB</color>
+    <color name="colorPrimaryOpacidad10">#DEF6F6</color>
+    <color name="gris">#90a4ae</color>
+    <color name="colorBlancoOpacidad">#CBF5F5F5</color>
+</resources>
