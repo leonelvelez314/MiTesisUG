@@ -7,4 +7,5 @@
     <color name="colorPrimaryOpacidad10">#DEF6F6</color>
     <color name="gris">#90a4ae</color>
     <color name="colorBlancoOpacidad">#CBF5F5F5</color>
+    <color name="black">#FF000000</color>
 </resources>

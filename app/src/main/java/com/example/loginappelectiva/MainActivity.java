@@ -15,70 +15,58 @@ import com.example.loginappelectiva.Modelo.Usuario;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText editTextTextEmailAddress, editTextTextPassword;
-    private Button ButtonInicio;
-    private TextView miSalida;
+    private EditText editTextTextPersonName,editTextTextPassword;
+    private Button button;
+    private TextView validation;
 
-    private ArrayList<Usuario> ListaUsuario;
-
+    private ArrayList<Usuario> ListaUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
-        this.ini();
+
+        editTextTextPersonName = (EditText) findViewById(R.id.editTextTextPersonName);
+        editTextTextPassword = (EditText) findViewById(R.id.editTextTextPassword);
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(this);
+        validation = (TextView) findViewById(R.id.validation);
     }
-    public void ini ()
-    {
-        editTextTextEmailAddress = (EditText) findViewById(R.id.editTextTextEmailAddress);
-        editTextTextPassword = (EditText) findViewById((R.id.editTextTextPassword));
-        ButtonInicio = (Button) findViewById(R.id.ButtonInicio);
-        ButtonInicio.setOnClickListener(this);
-        miSalida = (TextView)findViewById(R.id.txt_salida);
+
+    private void llenarUsuarios(){
+        ListaUsuarios = new ArrayList<>();
+        ListaUsuarios.add(new Usuario("Nathi","Bohorquez","nathalie.bohorquezc@ug.edu.ec","123456"));
+        ListaUsuarios.add(new Usuario("Saskia","Garcia","saskia03garcia@gmail.com","12345"));
+
     }
-    private void llenarUsuarios()
-    {
-        ListaUsuario = new ArrayList<Usuario>();
-        ListaUsuario.add(new Usuario("Saskia", "Garcia","saskia03garcia@gmail.com","12345"));
-    }
-    private void iniciarSesion()
-    {
+
+    private void inicioSesion(){
         llenarUsuarios();
-        String correo = editTextTextEmailAddress.getText().toString();
-        String contrasena =editTextTextPassword.getText().toString();
+        String email = editTextTextPersonName.getText().toString();
+        String password = editTextTextPassword.getText().toString();
 
         boolean usuarioEncontrado = false;
 
-        for (int i =0; i<ListaUsuario.size(); i++)
-        {
-            if (correo.equals(ListaUsuario.get(i).getCorreo()) && contrasena.equals(ListaUsuario.get(i).getContrasena()))
-            {
-                //Toast.makeText(this, "Bienvenido " +  ListaUsuario.get(i).getNombre(),Toast.LENGTH_SHORT).show();
-                miSalida.setText("Bienvenido ");
+        for(int i = 0; i<ListaUsuarios.size() ;i++){
+            if (email.equals(ListaUsuarios.get(i).getCorreo()) && password.equals(ListaUsuarios.get(i).getContrasena())){
+                validation.setText("Bienvenido");
                 usuarioEncontrado = true;
                 Intent inicio = new Intent(MainActivity.this, InicioMainActivity.class);
                 startActivity(inicio);
             }
-            else if(correo.isEmpty() || contrasena.isEmpty())
-            {
-                //Toast.makeText(this, "Llene los campos" ,Toast.LENGTH_SHORT).show();
-                miSalida.setText("Llene los campos");
+            else if (email.isEmpty() || password.isEmpty()){
+                validation.setText("Llene los campos");
             }
-            else
-            {
-               // Toast.makeText(this, "USUARIO NO ENCONTRADO" ,Toast.LENGTH_SHORT).show();
-                miSalida.setText("USUARIO NO ENCONTRADO");
+
+            else {
+                validation.setText("Usuario Incorrecto");
             }
         }
 
-
     }
+
     @Override
     public void onClick(View v) {
-
-            this.iniciarSesion();
-
+        this.inicioSesion();
     }
-
-    }
+}
